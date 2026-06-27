@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TRA CỨU NĂNG LƯỢNG SỐ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -15,7 +15,7 @@
     body {
       background: #f0f4f8;
       color: #1e293b;
-      padding: 15px;
+      padding: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -25,115 +25,82 @@
       background: #ffffff;
       width: 100%;
       max-width: 1000px;
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      padding: 15px;
       position: relative;
-      overflow: hidden;
-    }
-    @media (min-width: 768px) {
-      body { padding: 30px; }
-      .container { padding: 40px; }
     }
     
-    /* Tiêu đề chính tra cứu */
     h1 {
       text-align: center;
       color: #0f172a;
       font-weight: 700;
-      margin-bottom: 10px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 24px;
+      letter-spacing: 1px;
+      font-size: 18px;
       background: linear-gradient(135deg, #1e3a8a 0%, #6b21a8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    @media (min-width: 768px) { h1 { font-size: 32px; } }
 
-    /* Dấu ấn Mandala/Merkaba */
     .mandala-signature {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 25px auto;
-      border: 2px dashed #8b5cf6;
+      width: 35px;
+      height: 35px;
+      margin: 5px auto 12px auto;
+      border: 1.5px dashed #8b5cf6;
       border-radius: 50%;
       position: relative;
       animation: spinMandala 20s linear infinite;
-      opacity: 0.7;
+      opacity: 0.6;
     }
     .mandala-signature::before, .mandala-signature::after {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      border: 2px solid #3b82f6;
+      border: 1.5px solid #3b82f6;
     }
     .mandala-signature::before { transform: rotate(30deg); border-color: #6366f1; }
     .mandala-signature::after { transform: rotate(60deg); border-color: #ec4899; }
-    
-    @keyframes spinMandala {
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes spinMandala { 100% { transform: rotate(360deg); } }
 
-    /* Khu vực Input Holographic */
+    /* Khu vực Input siêu gọn */
     .search-box {
       background: linear-gradient(135deg, #f5f3ff 0%, #eff6ff 100%);
-      border: 2px solid transparent;
-      background-image: linear-gradient(#f5f3ff, #eff6ff), linear-gradient(135deg, #a855f7, #3b82f6);
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      border-radius: 20px;
-      padding: 25px;
-      margin-bottom: 35px;
-      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.08);
+      border: 1px solid #c084fc;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 15px;
     }
     .form-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    @media (min-width: 768px) {
-      .form-grid { grid-template-columns: 1.2fr 1fr; gap: 25px; }
+      gap: 8px;
+      margin-bottom: 10px;
     }
     
     label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 11px;
       color: #5b21b6;
       text-transform: uppercase;
-      letter-spacing: 0.7px;
     }
     
     input[type="text"], input[type="number"] {
       width: 100%;
-      padding: 14px 18px;
-      border: 2px solid #ddd6fe;
-      background-color: #ffffff;
-      color: #1e1b4b;
-      border-radius: 12px;
-      font-size: 16px;
+      padding: 8px 12px;
+      border: 1px solid #ddd6fe;
+      border-radius: 8px;
+      font-size: 14px;
       font-weight: 600;
       outline: none;
-      transition: all 0.3s ease;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
     }
-    input[type="text"] { text-align: left; }
     input[type="number"] { text-align: center; }
-    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    input:focus {
-      border-color: #8b5cf6;
-      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
-    }
     .birth-group {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 6px;
     }
 
     button {
@@ -141,187 +108,174 @@
       background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
       color: white;
       border: none;
-      padding: 16px;
-      font-size: 16px;
+      padding: 10px;
+      font-size: 13px;
       font-weight: 700;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.4s;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
-    }
-    button:disabled { background: #cbd5e1; cursor: not-allowed; box-shadow: none; }
-    button:hover:not(:disabled) { 
-      transform: translateY(-2px); 
-      box-shadow: 0 6px 25px rgba(168, 85, 247, 0.45);
-      filter: brightness(1.05);
+      letter-spacing: 0.5px;
     }
 
     .loading {
       display: none;
       text-align: center;
-      margin: 30px 0;
+      margin: 15px 0;
+      font-size: 13px;
       font-weight: 600;
       color: #7c3aed;
-      animation: pulse 1.5s infinite;
     }
-    @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 
-    .result-container { display: none; margin-top: 20px; }
+    .result-container { display: none; }
     .time-note {
-      font-size: 12px;
+      font-size: 10px;
       color: #64748b;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       text-align: right;
-      font-weight: 500;
     }
 
+    /* Thiết kế khối danh bạ dòng ngang siêu tiết kiệm không gian trên mobile */
     .energy-section {
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
     }
-    @media (min-width: 768px) { .energy-section { padding: 25px; } }
     
     .section-title {
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-    }
-    .section-title::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 18px;
-      margin-right: 10px;
-      border-radius: 3px;
+      color: #1e293b;
     }
 
+    /* Grid linh hoạt: Mobile xếp dòng ngang, Desktop chia cột */
     .grid-results {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    @media (min-width: 480px) { .grid-results { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 768px) { .grid-results { grid-template-columns: repeat(3, 1fr); } }
-    
-    .card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border-radius: 12px;
-      padding: 20px 15px;
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.01);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 4px;
+    }
+    
+    /* Giao diện dòng ngang nén gọn thông tin */
+    .card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      padding: 6px 10px;
+      display: grid;
+      grid-template-columns: 4.5fr 1.5fr; /* Chia cột Tên | Số */
       align-items: center;
-      text-align: center;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+    }
+    .card-text-wrapper {
+      display: flex;
+      flex-direction: column;
     }
     .card-title {
       font-size: 11px;
-      text-transform: uppercase;
-      color: #64748b;
+      color: #334155;
       font-weight: 600;
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
+    }
+    .card-meaning {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 400;
+      margin-top: 1px;
     }
     .card-value {
-      font-size: 26px;
+      font-size: 16px; 
       font-weight: 700;
-      line-height: 1.2;
+      text-align: right;
     }
 
-    /* KHỐI 1: Năng Lượng Cốt Lõi - Xanh Sapphire */
-    .sec-core { background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%); border: 1px solid #bae6fd; }
-    .sec-core .section-title { color: #0369a1; }
-    .sec-core .section-title::before { background: #0284c7; }
+    /* Màu sắc theo khối */
+    .sec-core { background: #f0f9ff; border-left: 3px solid #0284c7; }
     .sec-core .card-value { color: #0369a1; }
 
-    /* KHỐI 2: Khối Năng Lực - Tím Thạch Anh */
-    .sec-power { background: linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%); border: 1px solid #e9d5ff; }
-    .sec-power .section-title { color: #6b21a8; }
-    .sec-power .section-title::before { background: #8b5cf6; }
+    .sec-power { background: #faf5ff; border-left: 3px solid #8b5cf6; }
     .sec-power .card-value { color: #6b21a8; }
 
-    /* KHỐI 3: Dự Báo Thời Gian - Vàng Hổ Phách */
-    .sec-time { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border: 1px solid #fde68a; }
-    .sec-time .section-title { color: #b45309; }
-    .sec-time .section-title::before { background: #d97706; }
+    .sec-time { background: #fffbeb; border-left: 3px solid #d97706; }
     .sec-time .card-value { color: #b45309; }
 
-    /* KHỐI 4: Bản Đồ Chặng */
-    .sec-map { background: linear-gradient(135deg, #f1f5f9 0%, #f8fafc 100%); border: 1px solid #cbd5e1; }
-    .sec-map .section-title { color: #334155; }
-    .sec-map .section-title::before { background: #475569; }
+    .sec-map { background: #f8fafc; border-left: 3px solid #475569; }
 
-    /* Số nợ nghiệp đặc biệt */
-    .karmic-debt {
-      color: #dc2626 !important;
-      text-shadow: 0 0 1px rgba(220, 38, 38, 0.1);
-    }
+    .karmic-debt { color: #dc2626 !important; }
 
-    /* Bảng Chặng */
+    /* Bảng chặng ép nhỏ vừa màn hình */
     .table-container {
-      overflow-x: auto;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
+      overflow-x: hidden;
+      border-radius: 6px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       background: #ffffff;
-      min-width: 500px;
     }
     th, td {
-      padding: 14px 16px;
-      text-align: center;
-      font-size: 13.5px;
+      padding: 6px 4px;
+      text-align: center; 
+      font-size: 11px;
       border-bottom: 1px solid #f1f5f9;
     }
     th {
-      background-color: #f8fafc;
+      background-color: #f1f5f9;
       color: #475569;
       font-weight: 600;
     }
-    .highlight-val { font-weight: 700; color: #1e3a8a; font-size: 16px; }
+    .highlight-val { font-weight: 700; color: #1e3a8a; font-size: 12px; }
 
-    /* CHÂN TRANG ĐẶT LỊCH */
+    /* CHÂN TRANG ĐẶT LỊCH NÉN NHỎ */
     .booking-footer {
-      margin-top: 40px;
-      padding: 25px 15px;
+      margin-top: 12px;
+      padding: 10px;
       background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-      border-radius: 16px;
+      border-radius: 10px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
     }
     .booking-footer p {
-      color: #e2e8f0;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
+      color: #cbd5e1;
+      font-size: 10px;
+      margin-bottom: 2px;
     }
     .booking-footer .phone-number {
       color: #f43f5e;
-      font-size: 24px;
+      font-size: 14px;
       font-weight: 800;
-      letter-spacing: 2px;
-      display: inline-block;
-      text-shadow: 0 0 12px rgba(244, 63, 94, 0.4);
-      animation: pulseGlow 2s infinite alternate;
+      letter-spacing: 1px;
     }
-    @keyframes pulseGlow {
-      0% { transform: scale(1); text-shadow: 0 0 10px rgba(244, 63, 94, 0.3); }
-      100% { transform: scale(1.03); text-shadow: 0 0 20px rgba(244, 63, 94, 0.6); }
+
+    /* ĐỊNH DẠNG TRÊN PC / MÀN HÌNH LỚN: Tự động bung rộng ra như cũ để đảm bảo thẩm mỹ */
+    @media (min-width: 768px) {
+      .container { padding: 30px; border-radius: 24px; }
+      h1 { font-size: 30px; }
+      .mandala-signature { width: 55px; height: 55px; margin-bottom: 20px; }
+      .search-box { padding: 20px; margin-bottom: 25px; }
+      .form-grid { grid-template-columns: 1.2fr 1fr; gap: 20px; }
+      label { font-size: 12px; }
+      input[type="text"], input[type="number"] { padding: 12px; font-size: 16px; }
+      button { padding: 14px; font-size: 15px; }
+      
+      .grid-results {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 15px 10px;
+        background: #ffffff;
+      }
+      .card-text-wrapper { align-items: center; }
+      .card-title { font-size: 12px; margin-bottom: 6px; text-align: center; min-height: 32px; }
+      .card-meaning { font-size: 11px; text-align: center; border-top: 1px solid #f1f5f9; padding-top: 6px; margin-top: 6px; }
+      .card-value { font-size: 24px; text-align: center; width: 100%; }
+      th, td { padding: 12px; font-size: 13px; }
+      .highlight-val { font-size: 15px; }
+      .booking-footer { padding: 20px; margin-top: 25px; }
+      .booking-footer p { font-size: 13px; margin-bottom: 6px; }
+      .booking-footer .phone-number { font-size: 22px; }
     }
   </style>
 </head>
@@ -335,7 +289,7 @@
     <div class="form-grid">
       <div>
         <label for="fullName">Họ và Tên (Đầy đủ):</label>
-        <input type="text" id="fullName" placeholder="Ví dụ: HỒ THƯƠNG THẢO" autocomplete="off">
+        <input type="text" id="fullName" placeholder="HỒ THƯƠNG THẢO" autocomplete="off">
       </div>
       <div>
         <label>Ngày / Tháng / Năm sinh:</label>
@@ -346,10 +300,10 @@
         </div>
       </div>
     </div>
-    <button id="btnTraCuu" onclick="runCalculationsClient()">Khai Mở Năng Lượng Bản Đồ</button>
+    <button id="btnTraCuu" onclick="runCalculations()">Khai Mở Năng Lượng</button>
   </div>
   
-  <div class="loading" id="loadingText">Đang liên kết dữ liệu sóng rung các con số...</div>
+  <div class="loading" id="loadingText">Đang kết nối sóng năng lượng...</div>
   
   <div class="result-container" id="resultsBlock">
     <div class="time-note" id="currentTimeInfo"></div>
@@ -357,71 +311,66 @@
     <div class="energy-section sec-core">
       <div class="section-title">Chỉ Số Cốt Lõi & Tính Cách</div>
       <div class="grid-results">
-        <div class="card"><div class="card-title">1. Đường Đời</div><div class="card-value" id="valDuongDoi">-</div></div>
-        <div class="card"><div class="card-title">2. Sứ Mệnh</div><div class="card-value" id="valSuMenh">-</div></div>
-        <div class="card"><div class="card-title">3. Liên Kết Đường Đời - Sứ Mệnh</div><div class="card-value" id="valLkDDSM">-</div></div>
-        <div class="card"><div class="card-title">4. Trưởng Thành</div><div class="card-value" id="valTruongThanh">-</div></div>
-        <div class="card"><div class="card-title">5. Linh Hồn</div><div class="card-value" id="valLinhHon">-</div></div>
-        <div class="card"><div class="card-title">6. Nhân Cách</div><div class="card-value" id="valNhanCach">-</div></div>
-        <div class="card"><div class="card-title">7. Liên Kết Linh Hồn - Nhân Cách</div><div class="card-value" id="valLkLHNC">-</div></div>
-        <div class="card"><div class="card-title">8. Cân Bằng</div><div class="card-value" id="valCanBang">-</div></div>
-        <div class="card"><div class="card-title">9. Tư Duy Lý Trí</div><div class="card-value" id="valTuDuyLyTri">-</div></div>
-        <div class="card"><div class="card-title">19. Ngày Sinh</div><div class="card-value" id="valNgaySinh">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">1. Đường Đời</span><span class="card-meaning" id="meanDuongDoi"></span></div><div class="card-value" id="valDuongDoi">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">2. Sứ Mệnh</span><span class="card-meaning" id="meanSuMenh"></span></div><div class="card-value" id="valSuMenh">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">3. LK Đường Đời - Sứ Mệnh</span><span class="card-meaning" id="meanLkDDSM"></span></div><div class="card-value" id="valLkDDSM">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">4. Trưởng Thành</span><span class="card-meaning" id="meanTruongThanh"></span></div><div class="card-value" id="valTruongThanh">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">5. Linh Hồn</span><span class="card-meaning" id="meanLinhHon"></span></div><div class="card-value" id="valLinhHon">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">6. Nhân Cách</span><span class="card-meaning" id="meanNhanCach"></span></div><div class="card-value" id="valNhanCach">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">7. LK Linh Hồn - Nhân Cách</span><span class="card-meaning" id="meanLkLHNC"></span></div><div class="card-value" id="valLkLHNC">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">8. Cân Bằng</span><span class="card-meaning" id="meanCanBang"></span></div><div class="card-value" id="valCanBang">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">9. Tư Duy Lý Trí</span><span class="card-meaning" id="meanTuDuyLyTri"></span></div><div class="card-value" id="valTuDuyLyTri">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">19. Ngày Sinh</span><span class="card-meaning" id="meanNgaySinh"></span></div><div class="card-value" id="valNgaySinh">-</div></div>
       </div>
     </div>
 
     <div class="energy-section sec-power">
       <div class="section-title">Năng Lực & Ưu Nhược Điểm</div>
       <div class="grid-results">
-        <div class="card"><div class="card-title">10. Sức Mạnh Tiềm Thức</div><div class="card-value" id="valTiemThuc">-</div></div>
-        <div class="card"><div class="card-title">11. Chỉ Số Đam Mê</div><div class="card-value" id="valDamMe">-</div></div>
-        <div class="card"><div class="card-title">12. Chỉ Số Thiếu</div><div class="card-value" id="valThieu">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">10. Sức Mạnh Tiềm Thức</span><span class="card-meaning" id="meanTiemThuc"></span></div><div class="card-value" id="valTiemThuc">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">11. Chỉ Số Đam Mê</span><span class="card-meaning" id="meanDamMe"></span></div><div class="card-value" id="valDamMe">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">12. Chỉ Số Thiếu</span><span class="card-meaning" id="meanThieu"></span></div><div class="card-value" id="valThieu">-</div></div>
       </div>
     </div>
 
     <div class="energy-section sec-time">
-      <div class="section-title">Dự Báo Cá Nhân Thời Gian Hiện Tại</div>
+      <div class="section-title">Dự Báo Cá Nhân Hiện Tại</div>
       <div class="grid-results">
-        <div class="card"><div class="card-title">13. Năm Cá Nhân</div><div class="card-value" id="valNamCN">-</div></div>
-        <div class="card"><div class="card-title">14. Tháng Cá Nhân</div><div class="card-value" id="valThangCN">-</div></div>
-        <div class="card"><div class="card-title">15. Ngày Cá Nhân</div><div class="card-value" id="valNgayCN">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">13. Năm Cá Nhân</span><span class="card-meaning" id="meanNamCN"></span></div><div class="card-value" id="valNamCN">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">14. Tháng Cá Nhân</span><span class="card-meaning" id="meanThangCN"></span></div><div class="card-value" id="valThangCN">-</div></div>
+        <div class="card"><div class="card-text-wrapper"><span class="card-title">15. Ngày Cá Nhân</span><span class="card-meaning" id="meanNgayCN"></span></div><div class="card-value" id="valNgayCN">-</div></div>
       </div>
     </div>
 
     <div class="energy-section sec-map">
-      <div class="section-title">Bản Đồ Các Chặng Đường Đời & Thách Thức</div>
+      <div class="section-title">Bản Đồ Chặng & Thách Thức</div>
       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>Giai đoạn Chặng</th>
-              <th>Độ tuổi hoạt động</th>
-              <th>Chỉ số Chặng</th>
-              <th>Chỉ số Thách Thức</th>
+              <th>Chặng (Độ tuổi)</th>
+              <th>Chỉ số</th>
+              <th>Thách thức</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><b>Chặng 1</b> </td>
-              <td id="ageC1">-</td>
+              <td><b>C1</b> (<span id="ageC1">-</span>)</td>
               <td class="highlight-val" id="valC1">-</td>
               <td class="highlight-val" style="color:#dc2626;" id="valTT1">-</td>
             </tr>
             <tr>
-              <td><b>Chặng 2</b> </td>
-              <td id="ageC2">-</td>
+              <td><b>C2</b> (<span id="ageC2">-</span>)</td>
               <td class="highlight-val" id="valC2">-</td>
               <td class="highlight-val" style="color:#dc2626;" id="valTT2">-</td>
             </tr>
             <tr>
-              <td><b>Chặng 3</b> </td>
-              <td id="ageC3">-</td>
+              <td><b>C3</b> (<span id="ageC3">-</span>)</td>
               <td class="highlight-val" id="valC3">-</td>
               <td class="highlight-val" style="color:#dc2626;" id="valTT3">-</td>
             </tr>
             <tr>
-              <td><b>Chặng 4</b> </td>
-              <td id="ageC4">-</td>
+              <td><b>C4</b> (<span id="ageC4">-</span>)</td>
               <td class="highlight-val" id="valC4">-</td>
               <td class="highlight-val" style="color:#dc2626;" id="valTT4">-</td>
             </tr>
@@ -432,287 +381,43 @@
   </div>
 
   <div class="booking-footer">
-    <p>Để thấu hiểu sâu sắc bản đồ cuộc đời và kích hoạt năng lượng tối ưu</p>
+    <p>Để thấu hiểu sâu sắc bản đồ cuộc đời và kích hoạt tối ưu</p>
     <div class="phone-number">ĐẶT LỊCH LUẬN GIẢI: 0931547687</div>
   </div>
 </div>
 
 <script>
-  /* =========================================================================
-     PHẦN LOGIC TÍNH TOÁN (ĐƯỢC CHUYỂN TỪ FILE CODE.GS CŨ SANG TRỰC TIẾP TRÌNH DUYỆT)
-     ========================================================================= */
-
-  function isMasterNumber(num) {
-    return num === 11 || num === 22 || num === 33;
-  }
-
-  function reduceNumber(num, keepMaster) {
-    if (keepMaster === undefined) keepMaster = true;
-    
-    while (num > 9) {
-      if (keepMaster && isMasterNumber(num)) {
-        return num;
-      }
-      let sum = 0;
-      let temp = num;
-      while (temp > 0) {
-        sum += temp % 10;
-        temp = Math.floor(temp / 10);
-      }
-      num = sum;
-    }
-    return num;
-  }
-
-  function removeVietnameseTones(str) {
-    str = str.toUpperCase();
-    str = str.replace(/[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]/g, "A");
-    str = str.replace(/[ÈÉẸẺẼÊỀẾỆỂỄ]/g, "E");
-    str = str.replace(/[ÌÍỊỈĨ]/g, "I");
-    str = str.replace(/[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]/g, "O");
-    str = str.replace(/[ÙÚỤỦŨƯỪỨỰỬỮ]/g, "U");
-    str = str.replace(/[ỲÝYỶỸ]/g, "Y");
-    str = str.replace(/Đ/g, "D");
-    return str;
-  }
-
-  const letterToNumberMap = {
-    'A': 1, 'J': 1, 'S': 1,
-    'B': 2, 'K': 2, 'T': 2,
-    'C': 3, 'L': 3, 'U': 3,
-    'D': 4, 'M': 4, 'V': 4,
-    'E': 5, 'N': 5, 'W': 5,
-    'F': 6, 'O': 6, 'X': 6,
-    'G': 7, 'P': 7, 'Y': 7,
-    'H': 8, 'Q': 8, 'Z': 8,
-    'I': 9, 'R': 9
+  const numerologyMeanings = {
+    "1": "Tiên phong, độc lập, nhà lãnh đạo.",
+    "2": "Hòa bình, thấu hiểu, trực giác cao.",
+    "3": "Sáng tạo, giao tiếp, truyền cảm hứng.",
+    "4": "Kỷ luật, vững chãi, quy trình nền móng.",
+    "5": "Tự do, phiêu lưu, thích ứng đột phá.",
+    "6": "Yêu thương, gia đình, phụng sự chữa lành.",
+    "7": "Trí tuệ, triết học, chiều sâu tâm linh.",
+    "8": "Điều hành, tài chính, quyền lực nhân quả.",
+    "9": "Nhân đạo, lý tưởng bao dung, hoàn thành.",
+    "11": "Trực giác tâm linh, truyền tải thông điệp.",
+    "22": "Kiến tạo vĩ đại, hiện thực hóa ước mơ.",
+    "33": "Chữa lành, dẫn dắt bằng tình yêu lớn.",
+    "13/4": "Rèn kiên trì, vượt lười biếng.",
+    "14/5": "Kiểm soát cảm xúc, tránh quá độ.",
+    "16/7": "Rũ bỏ cái tôi, thức tỉnh tâm thức.",
+    "19/1": "Học cách tự lập, tránh độc đoán."
   };
 
-  function analyzeWord(word) {
-    let vowels = [];
-    let consonants = [];
-    const baseVowels = ['A', 'E', 'I', 'O', 'U'];
-    
-    for (let i = 0; i < word.length; i++) {
-      let char = word[i];
-      if (baseVowels.includes(char)) {
-        vowels.push({char: char, index: i});
-      } else if (char === 'Y') {
-        let hasOtherVowel = false;
-        for (let j = 0; j < word.length; j++) {
-          if (baseVowels.includes(word[j])) {
-            hasOtherVowel = true;
-            break;
-          }
-        }
-        if (!hasOtherVowel) {
-          vowels.push({char: char, index: i});
-        } else {
-          consonants.push({char: char, index: i});
-        }
-      } else {
-        if (letterToNumberMap[char]) {
-          consonants.push({char: char, index: i});
-        }
-      }
+  function getNumberMeaning(valStr) {
+    const cleanVal = valStr.trim();
+    if (numerologyMeanings[cleanVal]) return numerologyMeanings[cleanVal];
+    for (let key in numerologyMeanings) {
+      if (cleanVal.includes(key)) return numerologyMeanings[key];
     }
-    return { vowels: vowels, consonants: consonants };
+    return "Mang làn sóng năng lượng đặc biệt.";
   }
 
-  function calculateNumerologyLocal(fullName, birthDateStr) {
-    const parts = birthDateStr.split('-'); 
-    const dayRaw = parseInt(parts[0], 10);
-    const monthRaw = parseInt(parts[1], 10);
-    const yearRaw = parseInt(parts[2], 10);
-    
-    const dBasic = reduceNumber(dayRaw, false);
-    const mBasic = reduceNumber(monthRaw, false);
-    const yBasic = reduceNumber(yearRaw, false);
-    
-    const dayReduced = reduceNumber(dayRaw, true);
-    const monthReduced = reduceNumber(monthRaw, true);
-    const yearReduced = reduceNumber(yearRaw, true);
-    
-    // 1. Đường đời
-    let duongDoiRaw = dayReduced + monthReduced + yearReduced;
-    let duongDoi = reduceNumber(duongDoiRaw, true);
-    
-    // 2. Sứ mệnh
-    const cleanName = removeVietnameseTones(fullName).trim();
-    const words = cleanName.split(/\s+/);
-    
-    let wordSứMệnhValues = [];
-    let allVowelsNumbers = [];
-    let allConsonantsNumbers = [];
-    let firstLettersNumbers = [];
-    let presentNumbers = {};
-    
-    words.forEach(word => {
-      if(word.length > 0) {
-        let firstChar = word[0];
-        if(letterToNumberMap[firstChar]) {
-          firstLettersNumbers.push(letterToNumberMap[firstChar]);
-        }
-      }
-      
-      let analysis = analyzeWord(word);
-      let wordSum = 0;
-      for(let i=0; i<word.length; i++) {
-        let num = letterToNumberMap[word[i]];
-        if(num) {
-          wordSum += num;
-          presentNumbers[num] = true;
-        }
-      }
-      wordSứMệnhValues.push(reduceNumber(wordSum, true));
-      
-      analysis.vowels.forEach(v => {
-        allVowelsNumbers.push(letterToNumberMap[v.char]);
-      });
-      analysis.consonants.forEach(c => {
-        allConsonantsNumbers.push(letterToNumberMap[c.char]);
-      });
-    });
-    
-    let sumSuMenh = wordSứMệnhValues.reduce((a, b) => a + b, 0);
-    let suMenh = reduceNumber(sumSuMenh, true);
-    
-    // 3. Liên kết DDSM
-    let ddValueForLk = reduceNumber(duongDoi, false); 
-    let smValueForLk = reduceNumber(suMenh, false);
-    let lienKetDDSM = Math.abs(ddValueForLk - smValueForLk);
-    
-    // 4. Trưởng thành
-    let truongThanh = reduceNumber(duongDoi + suMenh, true);
-    
-    // 5. Linh hồn
-    let linhHonSum = allVowelsNumbers.reduce((a, b) => a + b, 0);
-    let linhHon = reduceNumber(linhHonSum, true);
-    
-    // 6. Nhân cách
-    let nhanCachSum = allConsonantsNumbers.reduce((a, b) => a + b, 0);
-    let nhanCach = reduceNumber(nhanCachSum, true);
-    
-    // 7. Liên kết LHNC
-    let lhValueForLk = reduceNumber(linhHon, false);
-    let ncValueForLk = reduceNumber(nhanCach, false);
-    let lienKetLHNC = Math.abs(lhValueForLk - ncValueForLk);
-    
-    // 8. Cân bằng
-    let canBangSum = firstLettersNumbers.reduce((a, b) => a + b, 0);
-    let canBang = reduceNumber(canBangSum, true);
-    
-    // 9. Tư duy lý trí
-    let tenRieng = words[words.length - 1];
-    let tenRiengSum = 0;
-    for(let i=0; i<tenRieng.length; i++) {
-      tenRiengSum += letterToNumberMap[tenRieng[i]] || 0;
-    }
-    let tenRiengReduced = reduceNumber(tenRiengSum, true);
-    let tuDuyLyTri = reduceNumber(tenRiengReduced + dBasic, true);
-    
-    // 12. Chỉ số thiếu
-    let thieu = [];
-    for (let i = 1; i <= 9; i++) {
-      if (!presentNumbers[i]) {
-        thieu.push(i);
-      }
-    }
-    
-    // 10. Sức mạnh tiềm thức
-    let socLuongSoThieu = thieu.length;
-    let sucManhTiemThuc = 9 - socLuongSoThieu;
-    
-    // 11. Đam mê
-    let counts = {};
-    let maxCount = 0;
-    words.forEach(word => {
-      for(let i=0; i<word.length; i++) {
-        let num = letterToNumberMap[word[i]];
-        if(num) {
-          counts[num] = (counts[num] || 0) + 1;
-          if(counts[num] > maxCount) {
-            maxCount = counts[num];
-          }
-        }
-      }
-    });
-    let damMe = [];
-    if (maxCount > 1) {
-      for (let num in counts) {
-        if (counts[num] === maxCount) {
-          damMe.push(parseInt(num, 10));
-        }
-      }
-    }
-    
-    // Dự báo thời gian thực
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth() + 1; 
-    const currentDay = now.getDate();
-    
-    let namVuTru = reduceNumber(currentYear, false);
-    let namCaNhan = reduceNumber(dBasic + mBasic + namVuTru, false);
-    let thangCaNhan = reduceNumber(namCaNhan + currentMonth, false);
-    let ngayCaNhan = reduceNumber(thangCaNhan + currentDay, false);
-    
-    // 4 Chặng
-    let chang1 = reduceNumber(dBasic + mBasic, true);
-    let chang2 = reduceNumber(dBasic + yBasic, true);
-    let chang3 = reduceNumber(chang1 + chang2, true);
-    let chang4 = reduceNumber(mBasic + yBasic, true);
-    
-    let ddBasic = reduceNumber(duongDoi, false); 
-    let tuoiChang1 = 36 - ddBasic;
-    let tuoiChang2 = tuoiChang1 + 9;
-    let tuoiChang3 = tuoiChang2 + 9;
-    let tuoiChang4 = tuoiChang3 + 9;
-    
-    // 4 Thách thức
-    let tt1 = Math.abs(dBasic - mBasic);
-    let tt2 = Math.abs(dBasic - yBasic);
-    let tt3 = Math.abs(tt1 - tt2);
-    let tt4 = Math.abs(mBasic - yBasic);
-    
-    let ngaySinh = reduceNumber(dayRaw, true);
-    
-    return {
-      duongDoi: duongDoi,
-      suMenh: suMenh,
-      lienKetDDSM: lienKetDDSM,
-      truongThanh: truongThanh,
-      linhHon: linhHon,
-      nhanCach: nhanCach,
-      lienKetLHNC: lienKetLHNC,
-      canBang: canBang,
-      tuDuyLyTri: tuDuyLyTri,
-      sucManhTiemThuc: sucManhTiemThuc,
-      damMe: damMe.join(', ') || 'Không có số vượt trội',
-      thieu: thieu.join(', ') || 'Không thiếu số nào',
-      namCaNhan: namCaNhan,
-      thangCaNhan: thangCaNhan,
-      ngayCaNhan: ngayCaNhan,
-      chang: {
-        c1: chang1, t1: tuoiChang1,
-        c2: chang2, t2: tuoiChang2,
-        c3: chang3, t3: tuoiChang3,
-        c4: chang4, t4: tuoiChang4
-      },
-      thachThuc: {
-        tt1: tt1, tt2: tt2, tt3: tt3, tt4: tt4
-      },
-      ngaySinh: ngaySinh,
-      currentDateInfo: `${currentDay}/${currentMonth}/${currentYear}`
-    };
-  }
-
-  /* =========================================================================
-     PHẦN ĐIỀU KHIỂN GIAO DIỆN (UI CONTROLLER)
-     ========================================================================= */
-
-  function formatAndDisplayKarmic(elementId, originalValue, resContext) {
+  function formatAndDisplayKarmic(elementId, meaningId, originalValue, resContext) {
     const element = document.getElementById(elementId);
+    const meaningElement = document.getElementById(meaningId);
     if (!element) return;
 
     let finalDisplay = String(originalValue).trim();
@@ -726,7 +431,6 @@
       isKarmic = true;
     } else {
       const valNum = parseInt(finalDisplay, 10);
-      
       if (elementId === 'valNgaySinh') {
         const dayInput = parseInt(document.getElementById('inDay').value, 10);
         if ([13, 14, 16, 19].includes(dayInput)) {
@@ -737,14 +441,10 @@
           isKarmic = true;
         }
       }
-      
       if (elementId === 'valTruongThanh' && valNum === 7) {
         const ddNum = parseInt(resContext.duongDoi, 10);
-        const smNum = parseInt(resContext.suMenh, 10);
-        if ([16, 25, 34, 43].includes(ddNum + smNum)) {
-          finalDisplay = '16/7';
-          isKarmic = true;
-        }
+        const smNum = parseInt(resContext.suMesh || resContext.suMenh, 10);
+        if ([16, 25, 34, 43].includes(ddNum + smNum)) { finalDisplay = '16/7'; isKarmic = true; }
         if ((ddNum + smNum) === 13) { finalDisplay = '13/4'; isKarmic = true; }
         if ((ddNum + smNum) === 14) { finalDisplay = '14/5'; isKarmic = true; }
         if ((ddNum + smNum) === 19) { finalDisplay = '19/1'; isKarmic = true; }
@@ -752,6 +452,7 @@
     }
 
     element.innerText = finalDisplay;
+    if (meaningElement) meaningElement.innerText = getNumberMeaning(finalDisplay);
 
     if (isKarmic || finalDisplay.includes('13/4') || finalDisplay.includes('14/5') || finalDisplay.includes('16/7') || finalDisplay.includes('19/1')) {
       element.classList.add('karmic-debt');
@@ -760,7 +461,7 @@
     }
   }
 
-  function runCalculationsClient() {
+  function runCalculations() {
     const fullName = document.getElementById('fullName').value.trim();
     const d = document.getElementById('inDay').value;
     const m = document.getElementById('inMonth').value;
@@ -768,7 +469,7 @@
     const btn = document.getElementById('btnTraCuu');
     
     if (!fullName || !d || !m || !y) {
-      alert('Vui lòng điền đầy đủ Họ tên và Ngày, Tháng, Năm sinh.');
+      alert('Vui lòng điền đầy đủ thông tin.');
       return;
     }
 
@@ -776,71 +477,69 @@
     const month = parseInt(m, 10);
     const year = parseInt(y, 10);
 
-    if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2030) {
-      alert('Ngày tháng năm sinh không hợp lệ!');
-      return;
-    }
-
     const padDay = day.toString().padStart(2, '0');
     const padMonth = month.toString().padStart(2, '0');
     const standardizedDate = padDay + '-' + padMonth + '-' + year;
     
     btn.disabled = true;
-    btn.innerText = "ĐANG KHỞI TẠO SÓNG RUNG...";
+    btn.innerText = "ĐANG KẾT NỐI VŨ TRỤ...";
     document.getElementById('loadingText').style.display = 'block';
     document.getElementById('resultsBlock').style.display = 'none';
     
-    // Giả lập hiệu ứng tải dữ liệu mượt mà trong 1 giây thay vì gọi qua Google Server
-    setTimeout(function() {
-      try {
-        const res = calculateNumerologyLocal(fullName, standardizedDate);
-        
+    google.script.run
+      .withSuccessHandler(function(res) {
         btn.disabled = false;
-        btn.innerText = "Khai Mở Năng Lượng Bản Đồ";
+        btn.innerText = "Khai Mở Năng Lượng";
         document.getElementById('loadingText').style.display = 'none';
         document.getElementById('resultsBlock').style.display = 'block';
         
-        formatAndDisplayKarmic('valDuongDoi', res.duongDoi, res);
-        formatAndDisplayKarmic('valSuMenh', res.suMenh, res);
-        formatAndDisplayKarmic('valLkDDSM', res.lienKetDDSM, res);
-        formatAndDisplayKarmic('valTruongThanh', res.truongThanh, res);
-        formatAndDisplayKarmic('valLinhHon', res.linhHon, res);
-        formatAndDisplayKarmic('valNhanCach', res.nhanCach, res);
-        formatAndDisplayKarmic('valLkLHNC', res.lienKetLHNC, res);
-        formatAndDisplayKarmic('valCanBang', res.canBang, res);
-        formatAndDisplayKarmic('valTuDuyLyTri', res.tuDuyLyTri, res);
-        formatAndDisplayKarmic('valNgaySinh', res.ngaySinh, res);
+        formatAndDisplayKarmic('valDuongDoi', 'meanDuongDoi', res.duongDoi, res);
+        formatAndDisplayKarmic('valSuMenh', 'meanSuMenh', res.suMenh, res);
+        formatAndDisplayKarmic('valLkDDSM', 'meanLkDDSM', res.lienKetDDSM, res);
+        formatAndDisplayKarmic('valTruongThanh', 'meanTruongThanh', res.truongThanh, res);
+        formatAndDisplayKarmic('valLinhHon', 'meanLinhHon', res.linhHon, res);
+        formatAndDisplayKarmic('valNhanCach', 'meanNhanCach', res.nhanCach, res);
+        formatAndDisplayKarmic('valLkLHNC', 'meanLkLHNC', res.lienKetLHNC, res);
+        formatAndDisplayKarmic('valCanBang', 'meanCanBang', res.canBang, res);
+        formatAndDisplayKarmic('valTuDuyLyTri', 'meanTuDuyLyTri', res.tuDuyLyTri, res);
+        formatAndDisplayKarmic('valNgaySinh', 'meanNgaySinh', res.ngaySinh, res);
         
         document.getElementById('valTiemThuc').innerText = res.sucManhTiemThuc;
+        document.getElementById('meanTiemThuc').innerText = getNumberMeaning(String(res.sucManhTiemThuc));
         document.getElementById('valDamMe').innerText = res.damMe;
+        document.getElementById('meanDamMe').innerText = "Năng lực nổi trội nội tại.";
         document.getElementById('valThieu').innerText = res.thieu;
+        document.getElementById('meanThieu').innerText = "Sóng năng lượng khuyết thiếu.";
         
-        document.getElementById('currentTimeInfo').innerText = 'Tính toán theo ngày hiện tại: ' + res.currentDateInfo;
+        document.getElementById('currentTimeInfo').innerText = 'Ngày tra cứu: ' + res.currentDateInfo;
         document.getElementById('valNamCN').innerText = res.namCaNhan;
+        document.getElementById('meanNamCN').innerText = getNumberMeaning(String(res.namCaNhan));
         document.getElementById('valThangCN').innerText = res.thangCaNhan;
+        document.getElementById('meanThangCN').innerText = "Rung động năng lượng tháng.";
         document.getElementById('valNgayCN').innerText = res.ngayCaNhan;
+        document.getElementById('meanNgayCN').innerText = "Năng lượng vận hành ngày.";
         
         document.getElementById('valC1').innerText = res.chang.c1;
-        document.getElementById('ageC1').innerText = 'Từ 0 đến ' + res.chang.t1 + ' tuổi';
+        document.getElementById('ageC1').innerText = '0-' + res.chang.t1;
         document.getElementById('valC2').innerText = res.chang.c2;
-        document.getElementById('ageC2').innerText = 'Từ ' + (res.chang.t1 + 1) + ' đến ' + res.chang.t2 + ' tuổi';
+        document.getElementById('ageC2').innerText = (res.chang.t1 + 1) + '-' + res.chang.t2;
         document.getElementById('valC3').innerText = res.chang.c3;
-        document.getElementById('ageC3').innerText = 'Từ ' + (res.chang.t2 + 1) + ' đến ' + res.chang.t3 + ' tuổi';
+        document.getElementById('ageC3').innerText = (res.chang.t2 + 1) + '-' + res.chang.t3;
         document.getElementById('valC4').innerText = res.chang.c4;
-        document.getElementById('ageC4').innerText = 'Từ ' + (res.chang.t3 + 1) + ' tuổi trở đi';
+        document.getElementById('ageC4').innerText = (res.chang.t3 + 1) + '+';
         
         document.getElementById('valTT1').innerText = res.thachThuc.tt1;
         document.getElementById('valTT2').innerText = res.thachThuc.tt2;
         document.getElementById('valTT3').innerText = res.thachThuc.tt3;
         document.getElementById('valTT4').innerText = res.thachThuc.tt4;
-        
-      } catch (err) {
+      })
+      .withFailureHandler(function(err) {
         btn.disabled = false;
-        btn.innerText = "Khai Mở Năng Lượng Bản Đồ";
+        btn.innerText = "Khai Mở Năng Lượng";
         document.getElementById('loadingText').style.display = 'none';
-        alert('Có lỗi xảy ra khi tính toán: ' + err.message);
-      }
-    }, 1000);
+        alert('Có lỗi xảy ra: ' + err.message);
+      })
+      .calculateNumerology(fullName, standardizedDate);
   }
 </script>
 </body>
