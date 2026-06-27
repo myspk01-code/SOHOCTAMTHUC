@@ -116,6 +116,7 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+    button:disabled { background: #cbd5e1; cursor: not-allowed; }
 
     .loading {
       display: none;
@@ -387,6 +388,207 @@
 </div>
 
 <script>
+  /* =========================================================================
+     THUẬT TOÁN LOGIC TÍNH TOÁN - VẬN HÀNH TRỰC TIẾP TRÊN TRÌNH DUYỆT (THAY THẾ GS)
+     ========================================================================= */
+
+  function isMasterNumber(num) {
+    return num === 11 || num === 22 || num === 33;
+  }
+
+  function reduceNumber(num, keepMaster) {
+    if (keepMaster === undefined) keepMaster = true;
+    while (num > 9) {
+      if (keepMaster && isMasterNumber(num)) return num;
+      let sum = 0;
+      let temp = num;
+      while (temp > 0) {
+        sum += temp % 10;
+        temp = Math.floor(temp / 10);
+      }
+      num = sum;
+    }
+    return num;
+  }
+
+  function removeVietnameseTones(str) {
+    str = str.toUpperCase();
+    str = str.replace(/[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]/g, "A");
+    str = str.replace(/[ÈÉẸẺẼÊỀẾỆỂỄ]/g, "E");
+    str = str.replace(/[ÌÍỊỈĨ]/g, "I");
+    str = str.replace(/[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]/g, "O");
+    str = str.replace(/[ÙÚỤỦŨƯỪỨỰỬỮ]/g, "U");
+    str = str.replace(/[ỲÝYỶỸ]/g, "Y");
+    str = str.replace(/Đ/g, "D");
+    return str;
+  }
+
+  const letterToNumberMap = {
+    'A': 1, 'J': 1, 'S': 1, 'B': 2, 'K': 2, 'T': 2, 'C': 3, 'L': 3, 'U': 3,
+    'D': 4, 'M': 4, 'V': 4, 'E': 5, 'N': 5, 'W': 5, 'F': 6, 'O': 6, 'X': 6,
+    'G': 7, 'P': 7, 'Y': 7, 'H': 8, 'Q': 8, 'Z': 8, 'I': 9, 'R': 9
+  };
+
+  function analyzeWord(word) {
+    let vowels = [];
+    let consonants = [];
+    const baseVowels = ['A', 'E', 'I', 'O', 'U'];
+    for (let i = 0; i < word.length; i++) {
+      let char = word[i];
+      if (baseVowels.includes(char)) {
+        vowels.push({char: char, index: i});
+      } else if (char === 'Y') {
+        let hasOtherVowel = false;
+        for (let j = 0; j < word.length; j++) {
+          if (baseVowels.includes(word[j])) { hasOtherVowel = true; break; }
+        }
+        if (!hasOtherVowel) vowels.push({char: char, index: i});
+        else consonants.push({char: char, index: i});
+      } else {
+        if (letterToNumberMap[char]) consonants.push({char: char, index: i});
+      }
+    }
+    return { vowels: vowels, consonants: consonants };
+  }
+
+  function calculateNumerologyLocal(fullName, birthDateStr) {
+    const parts = birthDateStr.split('-'); 
+    const dayRaw = parseInt(parts[0], 10);
+    const monthRaw = parseInt(parts[1], 10);
+    const yearRaw = parseInt(parts[2], 10);
+    
+    const dBasic = reduceNumber(dayRaw, false);
+    const mBasic = reduceNumber(monthRaw, false);
+    const yBasic = reduceNumber(yearRaw, false);
+    
+    const dayReduced = reduceNumber(dayRaw, true);
+    const monthReduced = reduceNumber(monthRaw, true);
+    const yearReduced = reduceNumber(yearRaw, true);
+    
+    let duongDoiRaw = dayReduced + monthReduced + yearReduced;
+    let duongDoi = reduceNumber(duongDoiRaw, true);
+    
+    const cleanName = removeVietnameseTones(fullName).trim();
+    const words = cleanName.split(/\s+/);
+    
+    let wordSứMệnhValues = [];
+    let allVowelsNumbers = [];
+    let allConsonantsNumbers = [];
+    let firstLettersNumbers = [];
+    let presentNumbers = {};
+    
+    words.forEach(word => {
+      if(word.length > 0) {
+        let firstChar = word[0];
+        if(letterToNumberMap[firstChar]) firstLettersNumbers.push(letterToNumberMap[firstChar]);
+      }
+      let analysis = analyzeWord(word);
+      let wordSum = 0;
+      for(let i=0; i<word.length; i++) {
+        let num = letterToNumberMap[word[i]];
+        if(num) { wordSum += num; presentNumbers[num] = true; }
+      }
+      wordSứMệnhValues.push(reduceNumber(wordSum, true));
+      analysis.vowels.forEach(v => allVowelsNumbers.push(letterToNumberMap[v.char]));
+      analysis.consonants.forEach(c => allConsonantsNumbers.push(letterToNumberMap[c.char]));
+    });
+    
+    let sumSuMenh = wordSứMệnhValues.reduce((a, b) => a + b, 0);
+    let suMenh = reduceNumber(sumSuMenh, true);
+    
+    let ddValueForLk = reduceNumber(duongDoi, false); 
+    let smValueForLk = reduceNumber(suMenh, false);
+    let lienKetDDSM = Math.abs(ddValueForLk - smValueForLk);
+    
+    let truongThanh = reduceNumber(duongDoi + suMenh, true);
+    let linhHonSum = allVowelsNumbers.reduce((a, b) => a + b, 0);
+    let linhHon = reduceNumber(linhHonSum, true);
+    let nhanCachSum = allConsonantsNumbers.reduce((a, b) => a + b, 0);
+    let nhanCach = reduceNumber(nhanCachSum, true);
+    
+    let lhValueForLk = reduceNumber(linhHon, false);
+    let ncValueForLk = reduceNumber(nhanCach, false);
+    let lienKetLHNC = Math.abs(lhValueForLk - ncValueForLk);
+    
+    let canBangSum = firstLettersNumbers.reduce((a, b) => a + b, 0);
+    let canBang = reduceNumber(canBangSum, true);
+    
+    let tenRieng = words[words.length - 1] || "";
+    let tenRiengSum = 0;
+    for(let i=0; i<tenRieng.length; i++) {
+      tenRiengSum += letterToNumberMap[tenRieng[i]] || 0;
+    }
+    let tenRiengReduced = reduceNumber(tenRiengSum, true);
+    let tuDuyLyTri = reduceNumber(tenRiengReduced + dBasic, true);
+    
+    let thieu = [];
+    for (let i = 1; i <= 9; i++) {
+      if (!presentNumbers[i]) thieu.push(i);
+    }
+    
+    let sucManhTiemThuc = 9 - thieu.length;
+    let counts = {};
+    let maxCount = 0;
+    words.forEach(word => {
+      for(let i=0; i<word.length; i++) {
+        let num = letterToNumberMap[word[i]];
+        if(num) {
+          counts[num] = (counts[num] || 0) + 1;
+          if(counts[num] > maxCount) maxCount = counts[num];
+        }
+      }
+    });
+    let damMe = [];
+    if (maxCount > 1) {
+      for (let num in counts) {
+        if (counts[num] === maxCount) damMe.push(parseInt(num, 10));
+      }
+    }
+    
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1; 
+    const currentDay = now.getDate();
+    
+    let namVuTru = reduceNumber(currentYear, false);
+    let namCaNhan = reduceNumber(dBasic + mBasic + namVuTru, false);
+    let thangCaNhan = reduceNumber(namCaNhan + currentMonth, false);
+    let ngayCaNhan = reduceNumber(thangCaNhan + currentDay, false);
+    
+    let chang1 = reduceNumber(dBasic + mBasic, true);
+    let chang2 = reduceNumber(dBasic + yBasic, true);
+    let chang3 = reduceNumber(chang1 + chang2, true);
+    let chang4 = reduceNumber(mBasic + yBasic, true);
+    
+    let ddBasic = reduceNumber(duongDoi, false); 
+    let tuoiChang1 = 36 - ddBasic;
+    let tuoiChang2 = tuoiChang1 + 9;
+    let tuoiChang3 = tuoiChang2 + 9;
+    let tuoiChang4 = tuoiChang3 + 9;
+    
+    let tt1 = Math.abs(dBasic - mBasic);
+    let tt2 = Math.abs(dBasic - yBasic);
+    let tt3 = Math.abs(tt1 - tt2);
+    let tt4 = Math.abs(mBasic - yBasic);
+    
+    let ngaySinh = reduceNumber(dayRaw, true);
+    
+    return {
+      duongDoi: duongDoi, suMenh: suMenh, lienKetDDSM: lienKetDDSM, truongThanh: truongThanh,
+      linhHon: linhHon, nhanCach: nhanCach, lienKetLHNC: lienKetLHNC, canBang: canBang,
+      tuDuyLyTri: tuDuyLyTri, sucManhTiemThuc: sucManhTiemThuc,
+      damMe: damMe.join(', ') || 'Không có số vượt trội',
+      thieu: thieu.join(', ') || 'Không thiếu số nào',
+      namCaNhan: namCaNhan, thangCaNhan: thangCaNhan, ngayCaNhan: ngayCaNhan,
+      chang: { c1: chang1, t1: tuoiChang1, c2: chang2, t2: tuoiChang2, c3: chang3, t3: tuoiChang3, c4: chang4, t4: tuoiChang4 },
+      thachThuc: { tt1: tt1, tt2: tt2, tt3: tt3, tt4: tt4 },
+      ngaySinh: ngaySinh, currentDateInfo: `${currentDay}/${currentMonth}/${currentYear}`
+    };
+  }
+
+  /* =========================================================================
+     TỪ ĐIỂN ĐỊNH NGHĨA Ý NGHĨA SÓNG RUNG NĂNG LƯỢNG
+     ========================================================================= */
   const numerologyMeanings = {
     "1": "Tiên phong, độc lập, nhà lãnh đạo.",
     "2": "Hòa bình, thấu hiểu, trực giác cao.",
@@ -400,10 +602,10 @@
     "11": "Trực giác tâm linh, truyền tải thông điệp.",
     "22": "Kiến tạo vĩ đại, hiện thực hóa ước mơ.",
     "33": "Chữa lành, dẫn dắt bằng tình yêu lớn.",
-    "13/4": "Rèn kiên trì, vượt lười biếng.",
-    "14/5": "Kiểm soát cảm xúc, tránh quá độ.",
-    "16/7": "Rũ bỏ cái tôi, thức tỉnh tâm thức.",
-    "19/1": "Học cách tự lập, tránh độc đoán."
+    "13/4": "Nợ nghiệp 13/4: Rèn kiên trì, vượt lười biếng.",
+    "14/5": "Nợ nghiệp 14/5: Kiểm soát cảm xúc, tránh quá độ.",
+    "16/7": "Nợ nghiệp 16/7: Rũ bỏ cái tôi, thức tỉnh tâm thức.",
+    "19/1": "Nợ nghiệp 19/1: Học cách tự lập, tránh độc đoán."
   };
 
   function getNumberMeaning(valStr) {
@@ -450,7 +652,7 @@
         }
         if (elementId === 'valTruongThanh' && valNum === 7 && resContext) {
           const ddNum = parseInt(resContext.duongDoi || 0, 10);
-          const smNum = parseInt(resContext.suMesh || resContext.suMenh || 0, 10);
+          const smNum = parseInt(resContext.suMenh || 0, 10);
           if ([16, 25, 34, 43].includes(ddNum + smNum)) { finalDisplay = '16/7'; isKarmic = true; }
           if ((ddNum + smNum) === 13) { finalDisplay = '13/4'; isKarmic = true; }
           if ((ddNum + smNum) === 14) { finalDisplay = '14/5'; isKarmic = true; }
@@ -487,30 +689,33 @@
     const month = parseInt(m, 10);
     const year = parseInt(y, 10);
 
+    if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2030) {
+      alert('Ngày tháng năm sinh không hợp lệ!');
+      return;
+    }
+
     const padDay = day.toString().padStart(2, '0');
     const padMonth = month.toString().padStart(2, '0');
     const standardizedDate = padDay + '-' + padMonth + '-' + year;
     
     btn.disabled = true;
-    btn.innerText = "ĐANG KẾT NỐI VŨ TRỤ...";
+    btn.innerText = "ĐANG KHỞI TẠO SÓNG RUNG...";
     document.getElementById('loadingText').style.display = 'block';
     document.getElementById('resultsBlock').style.display = 'none';
     
-    google.script.run
-      .withSuccessHandler(function(res) {
+    // Tạo chuyển động mượt mà giả lập hệ thống phân tích trong 800ms
+    setTimeout(function() {
+      try {
+        const res = calculateNumerologyLocal(fullName, standardizedDate);
+        
         btn.disabled = false;
         btn.innerText = "Khai Mở Năng Lượng";
         document.getElementById('loadingText').style.display = 'none';
         document.getElementById('resultsBlock').style.display = 'block';
         
-        if (!res) {
-          alert("Không nhận được dữ liệu từ hệ thống. Hãy kiểm tra hàm Code.gs!");
-          return;
-        }
-
-        // Khối 1
+        // Khối 1: Điền dữ liệu và Ý nghĩa dạng rút gọn
         formatAndDisplayKarmic('valDuongDoi', 'meanDuongDoi', res.duongDoi, res);
-        formatAndDisplayKarmic('valSuMenh', 'meanSuMenh', res.suMenh || res.suMesh, res);
+        formatAndDisplayKarmic('valSuMenh', 'meanSuMenh', res.suMenh, res);
         formatAndDisplayKarmic('valLkDDSM', 'meanLkDDSM', res.lienKetDDSM, res);
         formatAndDisplayKarmic('valTruongThanh', 'meanTruongThanh', res.truongThanh, res);
         formatAndDisplayKarmic('valLinhHon', 'meanLinhHon', res.linhHon, res);
@@ -520,63 +725,45 @@
         formatAndDisplayKarmic('valTuDuyLyTri', 'meanTuDuyLyTri', res.tuDuyLyTri, res);
         formatAndDisplayKarmic('valNgaySinh', 'meanNgaySinh', res.ngaySinh, res);
         
-        // Khối 2
-        if(document.getElementById('valTiemThuc')) {
-          document.getElementById('valTiemThuc').innerText = res.sucManhTiemThuc || "-";
-          document.getElementById('meanTiemThuc').innerText = getNumberMeaning(String(res.sucManhTiemThuc || ""));
-        }
-        if(document.getElementById('valDamMe')) {
-          document.getElementById('valDamMe').innerText = res.damMe || "-";
-          document.getElementById('meanDamMe').innerText = "Năng lực nổi trội nội tại.";
-        }
-        if(document.getElementById('valThieu')) {
-          document.getElementById('valThieu').innerText = res.thieu || "-";
-          document.getElementById('meanThieu').innerText = "Sóng năng lượng khuyết thiếu.";
-        }
+        // Khối 2: Năng lực nội tại
+        document.getElementById('valTiemThuc').innerText = res.sucManhTiemThuc;
+        document.getElementById('meanTiemThuc').innerText = getNumberMeaning(String(res.sucManhTiemThuc));
+        document.getElementById('valDamMe').innerText = res.damMe;
+        document.getElementById('meanDamMe').innerText = "Tần số năng lực tiềm ẩn nổi trội.";
+        document.getElementById('valThieu').innerText = res.thieu;
+        document.getElementById('meanThieu').innerText = "Bài học hoặc sóng năng lượng khuyết thiếu.";
         
-        // Khối 3
-        if(document.getElementById('currentTimeInfo')) {
-          document.getElementById('currentTimeInfo').innerText = 'Ngày tra cứu: ' + (res.currentDateInfo || "");
-        }
-        if(document.getElementById('valNamCN')) {
-          document.getElementById('valNamCN').innerText = res.namCaNhan || "-";
-          document.getElementById('meanNamCN').innerText = getNumberMeaning(String(res.namCaNhan || ""));
-        }
-        if(document.getElementById('valThangCN')) {
-          document.getElementById('valThangCN').innerText = res.thangCaNhan || "-";
-          document.getElementById('meanThangCN').innerText = "Rung động năng lượng tháng.";
-        }
-        if(document.getElementById('valNgayCN')) {
-          document.getElementById('valNgayCN').innerText = res.ngayCaNhan || "-";
-          document.getElementById('meanNgayCN').innerText = "Năng lượng vận hành ngày.";
-        }
+        // Khối 3: Vận niên cá nhân thời gian thực
+        document.getElementById('currentTimeInfo').innerText = 'Ngày tra cứu hệ thống: ' + res.currentDateInfo;
+        document.getElementById('valNamCN').innerText = res.namCaNhan;
+        document.getElementById('meanNamCN').innerText = getNumberMeaning(String(res.namCaNhan));
+        document.getElementById('valThangCN').innerText = res.thangCaNhan;
+        document.getElementById('meanThangCN').innerText = "Rung động chu kỳ tháng hiện tại.";
+        document.getElementById('valNgayCN').innerText = res.ngayCaNhan;
+        document.getElementById('meanNgayCN').innerText = "Sóng năng lượng biến động trong ngày.";
         
-        // Khối 4 (Chặng & Thách thức)
-        if (res.chang) {
-          if(document.getElementById('valC1')) document.getElementById('valC1').innerText = res.chang.c1 || "-";
-          if(document.getElementById('ageC1')) document.getElementById('ageC1').innerText = '0-' + (res.chang.t1 || "");
-          if(document.getElementById('valC2')) document.getElementById('valC2').innerText = res.chang.c2 || "-";
-          if(document.getElementById('ageC2')) document.getElementById('ageC2').innerText = ((res.chang.t1 || 0) + 1) + '-' + (res.chang.t2 || "");
-          if(document.getElementById('valC3')) document.getElementById('valC3').innerText = res.chang.c3 || "-";
-          if(document.getElementById('ageC3')) document.getElementById('ageC3').innerText = ((res.chang.t2 || 0) + 1) + '-' + (res.chang.t3 || "");
-          if(document.getElementById('valC4')) document.getElementById('valC4').innerText = res.chang.c4 || "-";
-          if(document.getElementById('ageC4')) document.getElementById('ageC4').innerText = ((res.chang.t3 || 0) + 1) + '+';
-        }
+        // Khối 4: Bản đồ Đại chặng đời người
+        document.getElementById('valC1').innerText = res.chang.c1;
+        document.getElementById('ageC1').innerText = '0-' + res.chang.t1 + 't';
+        document.getElementById('valC2').innerText = res.chang.c2;
+        document.getElementById('ageC2').innerText = (res.chang.t1 + 1) + '-' + res.chang.t2 + 't';
+        document.getElementById('valC3').innerText = res.chang.c3;
+        document.getElementById('ageC3').innerText = (res.chang.t2 + 1) + '-' + res.chang.t3 + 't';
+        document.getElementById('valC4').innerText = res.chang.c4;
+        document.getElementById('ageC4').innerText = (res.chang.t3 + 1) + 't+';
         
-        if (res.thachThuc) {
-          if(document.getElementById('valTT1')) document.getElementById('valTT1').innerText = res.thachThuc.tt1 || "-";
-          if(document.getElementById('valTT2')) document.getElementById('valTT2').innerText = res.thachThuc.tt2 || "-";
-          if(document.getElementById('valTT3')) document.getElementById('valTT3').innerText = res.thachThuc.tt3 || "-";
-          if(document.getElementById('valTT4')) document.getElementById('valTT4').innerText = res.thachThuc.tt4 || "-";
-        }
-      })
-      .withFailureHandler(function(err) {
+        document.getElementById('valTT1').innerText = res.thachThuc.tt1;
+        document.getElementById('valTT2').innerText = res.thachThuc.tt2;
+        document.getElementById('valTT3').innerText = res.thachThuc.tt3;
+        document.getElementById('valTT4').innerText = res.thachThuc.tt4;
+        
+      } catch (err) {
         btn.disabled = false;
         btn.innerText = "Khai Mở Năng Lượng";
         document.getElementById('loadingText').style.display = 'none';
-        alert('Lỗi kết nối Backend Apps Script: ' + err.message);
-      })
-      .calculateNumerology(fullName, standardizedDate);
+        alert('Lỗi trong quá trình phân tích sóng: ' + err.message);
+      }
+    }, 800);
   }
 </script>
 </body>
