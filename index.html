@@ -843,9 +843,8 @@
     }, 600);
   }
 </script>
-  <div class="zalo-popup-widget">
+ <div class="zalo-popup-widget">
   <a href="https://zalo.me/0931547687" target="_blank" rel="noopener noreferrer" title="Chat qua Zalo">
-    
     <div class="zalo-glow-circle"></div>
     <div class="zalo-glow-circle-2"></div>
     
@@ -860,24 +859,33 @@
   </a>
 </div>
 
+<div class="pdf-action-container">
+  <button onclick="xuatPDF()" class="btn-xuat-pdf">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px; vertical-align: middle;">
+      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+    </svg>
+    Xuất file PDF
+  </button>
+</div>
+
 <style>
-/* Toàn bộ khung chứa */
+/* --- STYLE NÚT ZALO (MÃ GỐC CỦA BẠN) --- */
 .zalo-popup-widget {
   position: fixed;
-  bottom: 25px;    /* Cách cạnh dưới màn hình 25px */
-  right: 25px;     /* Cách cạnh phải màn hình 25px - Đổi thành left nếu muốn chuyển sang bên trái */
-  z-index: 999999; /* Đảm bảo luôn nằm trên cùng của mọi thành phần */
+  bottom: 25px;    
+  right: 25px;     
+  z-index: 999999; 
   display: block;
   width: 60px;
   height: 60px;
 }
 
-/* Nút tròn Zalo chính */
 .zalo-icon-wrapper {
   position: absolute;
   width: 60px;
   height: 60px;
-  background-color: #0068ff; /* Màu xanh thương hiệu Zalo */
+  background-color: #0068ff; 
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -885,11 +893,9 @@
   box-shadow: 0 4px 15px rgba(0, 104, 255, 0.4);
   z-index: 3;
   transition: all 0.3s ease;
-  /* Hiệu ứng lắc nhẹ thu hút chú ý tự động */
   animation: zalo-shake 3s infinite ease-in-out;
 }
 
-/* Hiệu ứng sóng lan tỏa 1 */
 .zalo-glow-circle {
   position: absolute;
   top: 0; left: 0;
@@ -900,7 +906,6 @@
   animation: zalo-glow 2s infinite ease-out;
 }
 
-/* Hiệu ứng sóng lan tỏa 2 (chạy lệch pha) */
 .zalo-glow-circle-2 {
   position: absolute;
   top: 0; left: 0;
@@ -912,22 +917,20 @@
   animation-delay: 0.6s;
 }
 
-/* Khi di chuột vào nút */
 .zalo-popup-widget:hover .zalo-icon-wrapper {
   transform: scale(1.1);
   box-shadow: 0 6px 20px rgba(0, 104, 255, 0.6);
-  animation-play-state: paused; /* Tạm dừng lắc khi người dùng rê chuột vào */
+  animation-play-state: paused; 
 }
 
-/* Định nghĩa Tooltip chữ bên cạnh */
 .zalo-text-tooltip {
   position: absolute;
-  right: 75px; /* Xuất hiện bên trái của nút */
+  right: 75px; 
   top: 15px;
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
   padding: 7px 14px;
-  border-radius: 20px; /* Bo tròn thanh lịch */
+  border-radius: 20px; 
   font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   white-space: nowrap;
@@ -936,19 +939,15 @@
   transition: all 0.3s ease;
   transform: translateX(10px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  pointer-events: none; /* Tránh cản trở chuột */
+  pointer-events: none; 
 }
 
-/* Hiển thị tooltip khi hover */
 .zalo-popup-widget:hover .zalo-text-tooltip {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
 }
 
-/* --- KEYFRAMES HOẠT HỌA --- */
-
-/* Hiệu ứng lắc/rung nút */
 @keyframes zalo-shake {
   0%, 100% { transform: rotate(0) scale(1); }
   80% { transform: rotate(0) scale(1); }
@@ -958,17 +957,65 @@
   96% { transform: rotate(-5deg) scale(1.05); }
 }
 
-/* Hiệu ứng sóng nước lan tỏa rộng dần ra và mờ đi */
 @keyframes zalo-glow {
-  0% {
-    transform: scale(1);
-    opacity: 1;
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* --- STYLE BỔ SUNG CHO NÚT XUẤT PDF --- */
+.pdf-action-container {
+  text-align: center;
+  margin: 35px 0;
+  display: block;
+}
+
+.btn-xuat-pdf {
+  background-color: #e74c3c; /* Màu đỏ của biểu tượng PDF */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.btn-xuat-pdf:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
+}
+
+/* --- CẤU HÌNH IN TRANG WEB: TỰ ĐỘNG ẨN CÁC NÚT KHI XUẤT FILE PDF --- */
+@media print {
+  /* Ẩn hoàn toàn nút Zalo và nút xuất PDF để file tải về sạch sẽ */
+  .zalo-popup-widget,
+  .pdf-action-container {
+    display: none !important;
   }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
+  
+  /* Căn chỉnh lại lề khổ giấy A4 khi lưu PDF */
+  @page {
+    size: A4;
+    margin: 20mm 15mm;
+  }
+  
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
   }
 }
 </style>
+
+<script>
+function xuatPDF() {
+  window.print();
+}
+</script>
 </body>
 </html>
