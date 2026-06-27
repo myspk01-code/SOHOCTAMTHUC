@@ -943,7 +943,7 @@
   transform: translateX(0) !important;
 }
 
-/* --- STYLE NÚT XUẤT PDF ĐỐI DIỆN (ÉP SANG GÓC TRÁI) --- */
+/* --- STYLE NÚT XUẤT PDF ĐỐI DIỆN (GÓC TRÁI) --- */
 .pdf-popup-widget {
   position: fixed !important;
   bottom: 25px !important;    
@@ -1026,22 +1026,22 @@
 }
 
 /* ========================================================================
-   CẤU HÌNH IN TRANG: ÉP PHÓNG TO VÀ DÀN TRANG VỪA KHÍT KHỔ GIẤY A4
+   CẤU HÌNH IN TRANG: ÉP PHÓNG TO VÀ DÀN TRANG TRÀN TOÀN BỘ KHỔ GIẤY A4 NGANG
    ======================================================================== */
 @media print {
-  /* Ẩn hoàn toàn cả nút Zalo và nút PDF khi bắt đầu in */
+  /* Ẩn giao diện các nút bong bóng */
   .zalo-popup-widget,
   .pdf-popup-widget {
     display: none !important;
   }
   
-  /* Thiết lập khổ giấy A4 dọc và triệt tiêu lề trống của trình duyệt */
+  /* LỆNH THAY ĐỔI: Ép trình duyệt xoay ngang khổ giấy A4 (landscape) và đặt lề nhỏ */
   @page {
-    size: A4 portrait !important;
-    margin: 8mm 8mm 8mm 8mm !important; /* Thu nhỏ lề giấy xuống mức tối thiểu */
+    size: A4 landscape !important;
+    margin: 8mm 8mm 8mm 8mm !important; 
   }
   
-  /* Ép toàn bộ khung sườn trang web phải bung rộng 100% và không bị co cụm scale nhỏ */
+  /* Ép toàn bộ mã nguồn web bung rộng, tự căn tỷ lệ theo bề ngang */
   html, body {
     width: 100% !important;
     max-width: 100% !important;
@@ -1050,23 +1050,23 @@
     padding: 0 !important;
     background: #ffffff !important;
     color: #000000 !important;
-    font-size: 14pt !important; /* Phóng to cỡ chữ cơ bản khi in */
+    font-size: 11pt !important; /* Điều chỉnh font chữ tối ưu theo chiều ngang */
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Phá vỡ giới hạn chiều rộng (max-width) của mọi loại Container có trên web bạn */
+  /* Khóa bỏ mọi thuộc tính giới hạn chiều rộng cứng (ví dụ max-width: 1200px) để dàn trang khít lề */
   div, section, main, article, .container, [class*="container"], [class*="wrapper"] {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     padding: 0 !important;
     box-shadow: none !important;
     border: none !important;
   }
 
-  /* Ép các bảng biểu (nếu có) phải kéo dãn hết cỡ sang hai bên lề giấy */
+  /* Kéo căng các bảng thông tin, timeline số học trải rộng vừa vặn với trang giấy */
   table {
     width: 100% !important;
     max-width: 100% !important;
