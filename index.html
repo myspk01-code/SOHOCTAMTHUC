@@ -870,207 +870,91 @@
 </div>
 
 <style>
-/* --- STYLE NÚT ZALO (GÓC PHẢI) --- */
 .zalo-popup-widget {
-  position: fixed !important;
-  bottom: 25px !important;    
-  right: 25px !important;     
-  z-index: 999999 !important; 
-  display: block !important;
-  width: 60px !important;
-  height: 60px !important;
+  position: fixed !important; bottom: 25px !important; right: 25px !important;     
+  z-index: 999999 !important; display: block !important; width: 60px !important; height: 60px !important;
 }
-
 .zalo-icon-wrapper {
-  position: absolute !important;
-  width: 60px !important;
-  height: 60px !important;
-  background-color: #0068ff !important; 
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 4px 15px rgba(0, 104, 255, 0.4) !important;
-  z-index: 3 !important;
-  transition: all 0.3s ease !important;
-  animation: zalo-shake 3s infinite ease-in-out !important;
+  position: absolute !important; width: 60px !important; height: 60px !important;
+  background-color: #0068ff !important; border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  box-shadow: 0 4px 15px rgba(0, 104, 255, 0.4) !important; z-index: 3 !important;
+  transition: all 0.3s ease !important; animation: zalo-shake 3s infinite ease-in-out !important;
 }
-
 .zalo-glow-circle, .zalo-glow-circle-2 {
-  position: absolute !important;
-  top: 0 !important; left: 0 !important;
-  width: 60px !important; height: 60px !important;
-  background-color: rgba(0, 104, 255, 0.4) !important;
-  border-radius: 50% !important;
-  z-index: 1 !important;
-  animation: zalo-glow 2s infinite ease-out !important;
+  position: absolute !important; top: 0 !important; left: 0 !important;
+  width: 60px !important; height: 60px !important; background-color: rgba(0, 104, 255, 0.4) !important;
+  border-radius: 50% !important; z-index: 1 !important; animation: zalo-glow 2s infinite ease-out !important;
 }
-
-.zalo-glow-circle-2 {
-  background-color: rgba(0, 104, 255, 0.2) !important;
-  z-index: 2 !important;
-  animation-delay: 0.6s !important;
-}
-
-.zalo-popup-widget:hover .zalo-icon-wrapper {
-  transform: scale(1.1) !important;
-  box-shadow: 0 6px 20px rgba(0, 104, 255, 0.6) !important;
-  animation-play-state: paused !important; 
-}
-
+.zalo-glow-circle-2 { background-color: rgba(0, 104, 255, 0.2) !important; z-index: 2 !important; animation-delay: 0.6s !important; }
+.zalo-popup-widget:hover .zalo-icon-wrapper { transform: scale(1.1) !important; box-shadow: 0 6px 20px rgba(0, 104, 255, 0.6) !important; animation-play-state: paused !important; }
 .zalo-text-tooltip {
-  position: absolute !important;
-  right: 75px !important; 
-  top: 15px !important;
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #fff !important;
-  padding: 7px 14px !important;
-  border-radius: 20px !important; 
-  font-size: 13px !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  white-space: nowrap !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  transition: all 0.3s ease !important;
-  transform: translateX(10px) !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-  pointer-events: none !important; 
+  position: absolute !important; right: 75px !important; top: 15px !important;
+  background-color: rgba(0, 0, 0, 0.8) !important; color: #fff !important; padding: 7px 14px !important;
+  border-radius: 20px !important; font-size: 13px !important; font-family: sans-serif !important;
+  white-space: nowrap !important; opacity: 0 !important; visibility: hidden !important;
+  transition: all 0.3s ease !important; transform: translateX(10px) !important; pointer-events: none !important;
 }
+.zalo-popup-widget:hover .zalo-text-tooltip { opacity: 1 !important; visibility: visible !important; transform: translateX(0) !important; }
 
-.zalo-popup-widget:hover .zalo-text-tooltip {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateX(0) !important;
-}
-
-/* --- STYLE NÚT XUẤT PDF ĐỐI DIỆN (GÓC TRÁI) --- */
 .pdf-popup-widget {
-  position: fixed !important;
-  bottom: 25px !important;    
-  left: 25px !important; 
-  z-index: 999999 !important; 
-  display: block !important;
-  width: 60px !important;
-  height: 60px !important;
+  position: fixed !important; bottom: 25px !important; left: 25px !important; 
+  z-index: 999999 !important; display: block !important; width: 60px !important; height: 60px !important;
 }
-
 .btn-xuat-pdf {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 60px !important;
-  height: 60px !important;
-  background-color: #e74c3c !important; 
-  border: none !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4) !important;
-  cursor: pointer !important;
-  z-index: 3 !important;
-  transition: all 0.3s ease !important;
-  color: white !important;
-  padding: 0 !important;
+  position: absolute !important; top: 0 !important; left: 0 !important; width: 60px !important; height: 60px !important;
+  background-color: #e74c3c !important; border: none !important; border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4) !important; cursor: pointer !important;
+  z-index: 3 !important; transition: all 0.3s ease !important; color: white !important; padding: 0 !important;
 }
-
-.pdf-icon-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.pdf-popup-widget:hover .btn-xuat-pdf {
-  transform: scale(1.1) !important;
-  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6) !important;
-}
-
+.pdf-icon-wrapper { display: flex !important; align-items: center !important; justify-content: center !important; }
+.pdf-popup-widget:hover .btn-xuat-pdf { transform: scale(1.1) !important; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6) !important; }
 .pdf-text-tooltip {
-  position: absolute !important;
-  left: 75px !important; 
-  top: 15px !important;
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #fff !important;
-  padding: 7px 14px !important;
-  border-radius: 20px !important; 
-  font-size: 13px !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  white-space: nowrap !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  transition: all 0.3s ease !important;
-  transform: translateX(-10px) !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-  pointer-events: none !important; 
+  position: absolute !important; left: 75px !important; top: 15px !important;
+  background-color: rgba(0, 0, 0, 0.8) !important; color: #fff !important; padding: 7px 14px !important;
+  border-radius: 20px !important; font-size: 13px !important; font-family: sans-serif !important;
+  white-space: nowrap !important; opacity: 0 !important; visibility: hidden !important;
+  transition: all 0.3s ease !important; transform: translateX(-10px) !important; pointer-events: none !important;
 }
+.pdf-popup-widget:hover .pdf-text-tooltip { opacity: 1 !important; visibility: visible !important; transform: translateX(0) !important; }
 
-.pdf-popup-widget:hover .pdf-text-tooltip {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateX(0) !important;
-}
-
-/* --- KEYFRAMES HOẠT HỌA --- */
 @keyframes zalo-shake {
-  0%, 100% { transform: rotate(0) scale(1); }
-  80% { transform: rotate(0) scale(1); }
-  84% { transform: rotate(8deg) scale(1.05); }
-  88% { transform: rotate(-8deg) scale(1.05); }
-  92% { transform: rotate(5deg) scale(1.05); }
-  96% { transform: rotate(-5deg) scale(1.05); }
+  0%, 100% { transform: rotate(0) scale(1); } 80% { transform: rotate(0) scale(1); }
+  84% { transform: rotate(8deg) scale(1.05); } 88% { transform: rotate(-8deg) scale(1.05); }
+  92% { transform: rotate(5deg) scale(1.05); } 96% { transform: rotate(-5deg) scale(1.05); }
 }
-
-@keyframes zalo-glow {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.6); opacity: 0; }
-}
+@keyframes zalo-glow { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
 
 /* ========================================================================
-   CẤU HÌNH IN TRANG: ÉP PHÓNG TO VÀ DÀN TRANG TRÀN TOÀN BỘ KHỔ GIẤY A4 NGANG
+   CẤU HÌNH IN ĐẶC BIỆT: CHỐNG TRÀN, CHỐNG VỠ KHUNG, ÉP VỪA TRANG TUYỆT ĐỐI
    ======================================================================== */
 @media print {
-  /* Ẩn giao diện các nút bong bóng */
-  .zalo-popup-widget,
-  .pdf-popup-widget {
-    display: none !important;
-  }
+  .zalo-popup-widget, .pdf-popup-widget { display: none !important; }
   
-  /* LỆNH THAY ĐỔI: Ép trình duyệt xoay ngang khổ giấy A4 (landscape) và đặt lề nhỏ */
   @page {
-    size: A4 landscape !important;
-    margin: 8mm 8mm 8mm 8mm !important; 
+    size: A4 landscape !important; /* Ra lệnh xoay ngang tờ giấy */
+    margin: 5mm !important;        /* Thiết lập lề tối thiểu */
   }
   
-  /* Ép toàn bộ mã nguồn web bung rộng, tự căn tỷ lệ theo bề ngang */
   html, body {
+    width: 297mm !important;       /* Cố định chuẩn xác chiều ngang A4 */
+    height: 210mm !important;      /* Cố định chuẩn xác chiều dọc A4 */
+    margin: 0 !important; padding: 0 !important;
+    background: #ffffff !important; overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+  }
+
+  /* CHỐNG VỠ KHUNG: Ép container tổng co giãn theo tỷ lệ để khít hoàn toàn vào trang A4 */
+  body > div, body > main, .container, [class*="container"], [class*="wrapper"] {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 11pt !important; /* Điều chỉnh font chữ tối ưu theo chiều ngang */
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Khóa bỏ mọi thuộc tính giới hạn chiều rộng cứng (ví dụ max-width: 1200px) để dàn trang khít lề */
-  div, section, main, article, .container, [class*="container"], [class*="wrapper"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
     box-shadow: none !important;
     border: none !important;
-  }
-
-  /* Kéo căng các bảng thông tin, timeline số học trải rộng vừa vặn với trang giấy */
-  table {
-    width: 100% !important;
-    max-width: 100% !important;
-    table-layout: fixed !important;
+    box-sizing: border-box !important;
   }
 }
 </style>
