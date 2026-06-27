@@ -407,7 +407,8 @@
   };
 
   function getNumberMeaning(valStr) {
-    const cleanVal = valStr.trim();
+    if (!valStr) return "Chưa cập nhật năng lượng.";
+    const cleanVal = String(valStr).trim();
     if (numerologyMeanings[cleanVal]) return numerologyMeanings[cleanVal];
     for (let key in numerologyMeanings) {
       if (cleanVal.includes(key)) return numerologyMeanings[key];
@@ -416,48 +417,57 @@
   }
 
   function formatAndDisplayKarmic(elementId, meaningId, originalValue, resContext) {
-    const element = document.getElementById(elementId);
-    const meaningElement = document.getElementById(meaningId);
-    if (!element) return;
+    try {
+      const element = document.getElementById(elementId);
+      const meaningElement = document.getElementById(meaningId);
+      if (!element) return;
 
-    let finalDisplay = String(originalValue).trim();
-    let isKarmic = false;
+      if (originalValue === undefined || originalValue === null) {
+        element.innerText = "-";
+        return;
+      }
 
-    if (finalDisplay.includes('/') || ['13', '14', '16', '19'].includes(finalDisplay)) {
-      if (finalDisplay === '13') finalDisplay = '13/4';
-      if (finalDisplay === '14') finalDisplay = '14/5';
-      if (finalDisplay === '16') finalDisplay = '16/7';
-      if (finalDisplay === '19') finalDisplay = '19/1';
-      isKarmic = true;
-    } else {
-      const valNum = parseInt(finalDisplay, 10);
-      if (elementId === 'valNgaySinh') {
-        const dayInput = parseInt(document.getElementById('inDay').value, 10);
-        if ([13, 14, 16, 19].includes(dayInput)) {
-          if (dayInput === 13) finalDisplay = '13/4';
-          if (dayInput === 14) finalDisplay = '14/5';
-          if (dayInput === 16) finalDisplay = '16/7';
-          if (dayInput === 19) finalDisplay = '19/1';
-          isKarmic = true;
+      let finalDisplay = String(originalValue).trim();
+      let isKarmic = false;
+
+      if (finalDisplay.includes('/') || ['13', '14', '16', '19'].includes(finalDisplay)) {
+        if (finalDisplay === '13') finalDisplay = '13/4';
+        if (finalDisplay === '14') finalDisplay = '14/5';
+        if (finalDisplay === '16') finalDisplay = '16/7';
+        if (finalDisplay === '19') finalDisplay = '19/1';
+        isKarmic = true;
+      } else {
+        const valNum = parseInt(finalDisplay, 10);
+        if (elementId === 'valNgaySinh') {
+          const dayInput = parseInt(document.getElementById('inDay').value, 10);
+          if ([13, 14, 16, 19].includes(dayInput)) {
+            if (dayInput === 13) finalDisplay = '13/4';
+            if (dayInput === 14) finalDisplay = '14/5';
+            if (dayInput === 16) finalDisplay = '16/7';
+            if (dayInput === 19) finalDisplay = '19/1';
+            isKarmic = true;
+          }
+        }
+        if (elementId === 'valTruongThanh' && valNum === 7 && resContext) {
+          const ddNum = parseInt(resContext.duongDoi || 0, 10);
+          const smNum = parseInt(resContext.suMesh || resContext.suMenh || 0, 10);
+          if ([16, 25, 34, 43].includes(ddNum + smNum)) { finalDisplay = '16/7'; isKarmic = true; }
+          if ((ddNum + smNum) === 13) { finalDisplay = '13/4'; isKarmic = true; }
+          if ((ddNum + smNum) === 14) { finalDisplay = '14/5'; isKarmic = true; }
+          if ((ddNum + smNum) === 19) { finalDisplay = '19/1'; isKarmic = true; }
         }
       }
-      if (elementId === 'valTruongThanh' && valNum === 7) {
-        const ddNum = parseInt(resContext.duongDoi, 10);
-        const smNum = parseInt(resContext.suMesh || resContext.suMenh, 10);
-        if ([16, 25, 34, 43].includes(ddNum + smNum)) { finalDisplay = '16/7'; isKarmic = true; }
-        if ((ddNum + smNum) === 13) { finalDisplay = '13/4'; isKarmic = true; }
-        if ((ddNum + smNum) === 14) { finalDisplay = '14/5'; isKarmic = true; }
-        if ((ddNum + smNum) === 19) { finalDisplay = '19/1'; isKarmic = true; }
+
+      element.innerText = finalDisplay;
+      if (meaningElement) meaningElement.innerText = getNumberMeaning(finalDisplay);
+
+      if (isKarmic || finalDisplay.includes('13/4') || finalDisplay.includes('14/5') || finalDisplay.includes('16/7') || finalDisplay.includes('19/1')) {
+        element.classList.add('karmic-debt');
+      } else {
+        element.classList.remove('karmic-debt');
       }
-    }
-
-    element.innerText = finalDisplay;
-    if (meaningElement) meaningElement.innerText = getNumberMeaning(finalDisplay);
-
-    if (isKarmic || finalDisplay.includes('13/4') || finalDisplay.includes('14/5') || finalDisplay.includes('16/7') || finalDisplay.includes('19/1')) {
-      element.classList.add('karmic-debt');
-    } else {
-      element.classList.remove('karmic-debt');
+    } catch(e) {
+      console.log("Lỗi hiển thị chỉ số " + elementId + ": ", e);
     }
   }
 
@@ -493,8 +503,14 @@
         document.getElementById('loadingText').style.display = 'none';
         document.getElementById('resultsBlock').style.display = 'block';
         
+        if (!res) {
+          alert("Không nhận được dữ liệu từ hệ thống. Hãy kiểm tra hàm Code.gs!");
+          return;
+        }
+
+        // Khối 1
         formatAndDisplayKarmic('valDuongDoi', 'meanDuongDoi', res.duongDoi, res);
-        formatAndDisplayKarmic('valSuMenh', 'meanSuMenh', res.suMenh, res);
+        formatAndDisplayKarmic('valSuMenh', 'meanSuMenh', res.suMenh || res.suMesh, res);
         formatAndDisplayKarmic('valLkDDSM', 'meanLkDDSM', res.lienKetDDSM, res);
         formatAndDisplayKarmic('valTruongThanh', 'meanTruongThanh', res.truongThanh, res);
         formatAndDisplayKarmic('valLinhHon', 'meanLinhHon', res.linhHon, res);
@@ -504,40 +520,61 @@
         formatAndDisplayKarmic('valTuDuyLyTri', 'meanTuDuyLyTri', res.tuDuyLyTri, res);
         formatAndDisplayKarmic('valNgaySinh', 'meanNgaySinh', res.ngaySinh, res);
         
-        document.getElementById('valTiemThuc').innerText = res.sucManhTiemThuc;
-        document.getElementById('meanTiemThuc').innerText = getNumberMeaning(String(res.sucManhTiemThuc));
-        document.getElementById('valDamMe').innerText = res.damMe;
-        document.getElementById('meanDamMe').innerText = "Năng lực nổi trội nội tại.";
-        document.getElementById('valThieu').innerText = res.thieu;
-        document.getElementById('meanThieu').innerText = "Sóng năng lượng khuyết thiếu.";
+        // Khối 2
+        if(document.getElementById('valTiemThuc')) {
+          document.getElementById('valTiemThuc').innerText = res.sucManhTiemThuc || "-";
+          document.getElementById('meanTiemThuc').innerText = getNumberMeaning(String(res.sucManhTiemThuc || ""));
+        }
+        if(document.getElementById('valDamMe')) {
+          document.getElementById('valDamMe').innerText = res.damMe || "-";
+          document.getElementById('meanDamMe').innerText = "Năng lực nổi trội nội tại.";
+        }
+        if(document.getElementById('valThieu')) {
+          document.getElementById('valThieu').innerText = res.thieu || "-";
+          document.getElementById('meanThieu').innerText = "Sóng năng lượng khuyết thiếu.";
+        }
         
-        document.getElementById('currentTimeInfo').innerText = 'Ngày tra cứu: ' + res.currentDateInfo;
-        document.getElementById('valNamCN').innerText = res.namCaNhan;
-        document.getElementById('meanNamCN').innerText = getNumberMeaning(String(res.namCaNhan));
-        document.getElementById('valThangCN').innerText = res.thangCaNhan;
-        document.getElementById('meanThangCN').innerText = "Rung động năng lượng tháng.";
-        document.getElementById('valNgayCN').innerText = res.ngayCaNhan;
-        document.getElementById('meanNgayCN').innerText = "Năng lượng vận hành ngày.";
+        // Khối 3
+        if(document.getElementById('currentTimeInfo')) {
+          document.getElementById('currentTimeInfo').innerText = 'Ngày tra cứu: ' + (res.currentDateInfo || "");
+        }
+        if(document.getElementById('valNamCN')) {
+          document.getElementById('valNamCN').innerText = res.namCaNhan || "-";
+          document.getElementById('meanNamCN').innerText = getNumberMeaning(String(res.namCaNhan || ""));
+        }
+        if(document.getElementById('valThangCN')) {
+          document.getElementById('valThangCN').innerText = res.thangCaNhan || "-";
+          document.getElementById('meanThangCN').innerText = "Rung động năng lượng tháng.";
+        }
+        if(document.getElementById('valNgayCN')) {
+          document.getElementById('valNgayCN').innerText = res.ngayCaNhan || "-";
+          document.getElementById('meanNgayCN').innerText = "Năng lượng vận hành ngày.";
+        }
         
-        document.getElementById('valC1').innerText = res.chang.c1;
-        document.getElementById('ageC1').innerText = '0-' + res.chang.t1;
-        document.getElementById('valC2').innerText = res.chang.c2;
-        document.getElementById('ageC2').innerText = (res.chang.t1 + 1) + '-' + res.chang.t2;
-        document.getElementById('valC3').innerText = res.chang.c3;
-        document.getElementById('ageC3').innerText = (res.chang.t2 + 1) + '-' + res.chang.t3;
-        document.getElementById('valC4').innerText = res.chang.c4;
-        document.getElementById('ageC4').innerText = (res.chang.t3 + 1) + '+';
+        // Khối 4 (Chặng & Thách thức)
+        if (res.chang) {
+          if(document.getElementById('valC1')) document.getElementById('valC1').innerText = res.chang.c1 || "-";
+          if(document.getElementById('ageC1')) document.getElementById('ageC1').innerText = '0-' + (res.chang.t1 || "");
+          if(document.getElementById('valC2')) document.getElementById('valC2').innerText = res.chang.c2 || "-";
+          if(document.getElementById('ageC2')) document.getElementById('ageC2').innerText = ((res.chang.t1 || 0) + 1) + '-' + (res.chang.t2 || "");
+          if(document.getElementById('valC3')) document.getElementById('valC3').innerText = res.chang.c3 || "-";
+          if(document.getElementById('ageC3')) document.getElementById('ageC3').innerText = ((res.chang.t2 || 0) + 1) + '-' + (res.chang.t3 || "");
+          if(document.getElementById('valC4')) document.getElementById('valC4').innerText = res.chang.c4 || "-";
+          if(document.getElementById('ageC4')) document.getElementById('ageC4').innerText = ((res.chang.t3 || 0) + 1) + '+';
+        }
         
-        document.getElementById('valTT1').innerText = res.thachThuc.tt1;
-        document.getElementById('valTT2').innerText = res.thachThuc.tt2;
-        document.getElementById('valTT3').innerText = res.thachThuc.tt3;
-        document.getElementById('valTT4').innerText = res.thachThuc.tt4;
+        if (res.thachThuc) {
+          if(document.getElementById('valTT1')) document.getElementById('valTT1').innerText = res.thachThuc.tt1 || "-";
+          if(document.getElementById('valTT2')) document.getElementById('valTT2').innerText = res.thachThuc.tt2 || "-";
+          if(document.getElementById('valTT3')) document.getElementById('valTT3').innerText = res.thachThuc.tt3 || "-";
+          if(document.getElementById('valTT4')) document.getElementById('valTT4').innerText = res.thachThuc.tt4 || "-";
+        }
       })
       .withFailureHandler(function(err) {
         btn.disabled = false;
         btn.innerText = "Khai Mở Năng Lượng";
         document.getElementById('loadingText').style.display = 'none';
-        alert('Có lỗi xảy ra: ' + err.message);
+        alert('Lỗi kết nối Backend Apps Script: ' + err.message);
       })
       .calculateNumerology(fullName, standardizedDate);
   }
